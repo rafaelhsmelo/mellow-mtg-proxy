@@ -1,0 +1,157 @@
+/* Reset global de medidas para padronizar o comportamento dos navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: sans-serif;
+    height: 100vh; /* Ocupa a altura total da janela de visualização */
+}
+
+/* Divisão fundamental da tela utilizando eixo horizontal (linha) */
+.layout-container {
+    display: flex;
+    height: 100%;
+}
+
+/* --- MENU LATERAL --- */
+.sidebar {
+    width: 350px;
+    background-color: #2c3e50;
+    color: white;
+    padding: 20px;
+    display: flex;
+    flex-direction: column; /* Empilha os elementos internos verticalmente */
+}
+
+.sidebar-header {
+    margin-bottom: 20px;
+}
+
+/* Alinhamento horizontal do campo de texto e botão */
+.search-container {
+    display: flex;
+    margin-bottom: 20px;
+}
+
+#searchInput {
+    flex-grow: 1; /* Instrui o campo a expandir preenchendo o espaço disponível */
+    padding: 8px;
+    border: none;
+    border-radius: 4px 0 0 4px;
+}
+
+#searchButton {
+    padding: 8px 12px;
+    border: none;
+    background-color: #3498db;
+    color: white;
+    cursor: pointer;
+    border-radius: 0 4px 4px 0;
+}
+
+#searchButton:hover {
+    background-color: #2980b9;
+}
+
+/* --- ÁREA PRINCIPAL --- */
+.main-content {
+    flex-grow: 1; /* Preenche a área da tela não ocupada pelo menu lateral */
+    padding: 20px;
+    background-color: #f5f6fa;
+    overflow-y: auto; /* Habilita barra de rolagem apenas quando o conteúdo exceder a tela */
+}
+
+/* Corrigido de #cardContainer para #cardsContainer conforme o HTML */
+#cardsContainer {
+    display: flex;
+    justify-content: center;
+    padding: 20px;
+}
+
+/* --- MOLDE DA CARTA --- */
+.mtg-card {
+    /* Dimensões baseadas na proporção real de 63x88mm para renderização em tela */
+    width: 300px; 
+    height: 418px;
+    background-color: black;
+    border-radius: 12px;
+    padding: 10px;
+
+    /* Diretivas aplicadas pelo navegador estritamente no momento da impressão */
+    @media print {
+        width: 63mm;
+        height: 88mm;
+    }
+}
+
+.card-inner {
+    background-color: white;
+    height: 100%;
+    border-radius: 6px;
+    padding: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui o espaçamento residual de forma igualitária */
+    font-size: 14px;
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between; /* Fixa o Nome à esquerda e o Custo à direita */
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+}
+
+.card-art-placeholder {
+    height: 120px;
+    background-color: #eee;
+    display: flex;
+    align-items: center; /* Centralização vertical interna */
+    justify-content: center; /* Centralização horizontal interna */
+    margin: 8px 0;
+    color: #999;
+}
+
+.card-type {
+    font-weight: bold;
+    border-bottom: 1px solid #ccc;
+    padding-bottom: 4px;
+    margin-bottom: 8px;
+}
+
+.card-text-box {
+    flex-grow: 1; /* Força a caixa de texto a expandir tomando o centro da carta */
+    border: 1px solid #ccc;
+    padding: 6px;
+    margin-bottom: 8px;
+    background-color: #fdfdfd;
+}
+
+.card-footer{
+    display: flex;
+    justify-content: flex-end; /* Alinha o conteúdo à margem direita */
+    font-weight: bold;
+}
+
+/* --- TABELA DE DEPURAÇÃO --- */
+#debugTableContainer{
+    margin-top: 40px;
+    border-top: 2px dashed #ccc;
+    padding-top: 20px;
+}
+
+#debugTable{
+    width: 100%;
+    border-collapse: collapse; /* Funde bordas adjacentes para evitar duplicação visual */
+    background-color: white;
+}
+
+#debugTable th, #debugTable td {
+    border: 1px solid #999;
+    padding: 8px;
+    text-align: left;
+}

@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <!-- Garante a responsividade e o dimensionamento correto em diferentes telas -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mellow MTG Proxy</title>
+    <!-- Vincula as regras de estilização externas -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Contêiner principal estrutural (Flexbox) para dividir menu e área de trabalho -->
+    <div class="layout-container">
+        
+        <!-- Barra lateral de navegação e controles -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <h2>Menu</h2>
+            </div>
+
+            <!-- Contêiner do sistema de busca -->
+            <div class="search-container">
+                <input type="text" id="searchInput" placeholder="Ex: Sol Ring">
+                <button id="searchButton">Pesquisar</button>
+            </div>
+        </aside>
+
+        <!-- Área de exibição dinâmica -->
+        <main class="main-content">
+            
+            <!-- Contêiner destinado à renderização das cartas -->
+            <div id="cardsContainer">
+                
+                <!-- Estrutura base do molde da carta -->
+                <div class="mtg-card">
+                    <!-- Fundo branco da carta -->
+                    <div class="card-inner">
+                        <!-- Cabeçalho contendo Nome e Custo de Mana -->
+                        <div class="card-header">
+                            <span class="card-name">Nome</span>
+                            <span class="card-mana">Custo</span>
+                        </div>
+                        
+                        <!-- Espaço reservado para a futura inserção gráfica -->
+                        <div class="card-art-placeholder">[Arte]</div>
+                        
+                        <!-- Linha descritiva de tipos e subtipos -->
+                        <div class="card-type">Tipo</div>
+                        
+                        <!-- Caixa de regras oráculo -->
+                        <div class="card-text-box">Texto</div>
+                        
+                        <!-- Rodapé para status de combate (Poder/Resistência) -->
+                        <div class="card-footer">
+                            <span class="card-pt">Poder/Resistência</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Ferramenta de depuração para inspeção visual do JSON da API -->
+            <div id="debugTableContainer">
+                <h3>Dados do Scryfall</h3>
+                <table id="debugTable">
+                    <thead>
+                        <tr>
+                            <th>Propriedade</th>
+                            <th>Valor</th>
+                        </tr>
+                    </thead>
+                    <!-- Corpo da tabela onde o script injetará os dados -->
+                    <tbody id="debugTableBody">
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+    
+    <!-- Script posicionado no final para garantir o pré-carregamento do DOM -->
+    <script src="script.js"></script>
+</body>
+</html>
