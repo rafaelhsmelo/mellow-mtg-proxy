@@ -1,4 +1,5 @@
-/* Reset global de medidas para padronizar o comportamento dos navegadores */
+/* === RESET GLOBAL === */
+/* Reset de medidas para padronizar o comportamento dos navegadores */
 * {
     margin: 0;
     padding: 0;
@@ -7,23 +8,47 @@
 
 body {
     font-family: sans-serif;
-    height: 100vh; /* Ocupa a altura total da janela de visualização */
+    /* Ocupa a altura total da janela de visualização */
+    height: 100vh;
 }
 
-/* Divisão fundamental da tela utilizando eixo horizontal (linha) */
+/* === FONTES LOCAIS === */
+/* Ensinamos as fontes ao navegador apontando para a pasta local */
+@font-face {
+    font-family: 'Beleren Bold';
+    src: url('./fonts/Beleren2016-Bold.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Plantin Regular';
+    src: url('./fonts/PlantinMTProRg.ttf') format('truetype');
+    font-style: normal;
+}
+
+@font-face {
+    /* Mesmo font-family da regular, mudando apenas o font-style */
+    font-family: 'Plantin Regular';
+    src: url('./fonts/PlantinMTProRgIt.ttf') format('truetype');
+    font-style: italic;
+}
+
+/* === LAYOUT PRINCIPAL === */
+/* Divisão fundamental da tela utilizando eixo horizontal */
 .layout-container {
     display: flex;
     height: 100%;
 }
 
-/* --- MENU LATERAL --- */
+/* === MENU LATERAL === */
 .sidebar {
     width: 350px;
     background-color: #2c3e50;
     color: white;
     padding: 20px;
     display: flex;
-    flex-direction: column; /* Empilha os elementos internos verticalmente */
+    /* Empilha os elementos internos verticalmente */
+    flex-direction: column;
 }
 
 .sidebar-header {
@@ -37,7 +62,8 @@ body {
 }
 
 #searchInput {
-    flex-grow: 1; /* Instrui o campo a expandir preenchendo o espaço disponível */
+    /* Instrui o campo a expandir preenchendo o espaço disponível */
+    flex-grow: 1;
     padding: 8px;
     border: none;
     border-radius: 4px 0 0 4px;
@@ -56,26 +82,29 @@ body {
     background-color: #2980b9;
 }
 
-/* --- ÁREA PRINCIPAL --- */
+/* === ÁREA PRINCIPAL === */
 .main-content {
-    flex-grow: 1; /* Preenche a área da tela não ocupada pelo menu lateral */
+    /* Preenche a área da tela não ocupada pelo menu lateral */
+    flex-grow: 1;
     padding: 20px;
     background-color: #f5f6fa;
-    overflow-y: auto; /* Habilita barra de rolagem apenas quando o conteúdo exceder a tela */
+    /* Habilita barra de rolagem apenas quando o conteúdo exceder a tela */
+    overflow-y: auto;
 }
 
-/* Corrigido de #cardContainer para #cardsContainer conforme o HTML */
 #cardsContainer {
     display: flex;
     justify-content: center;
     padding: 20px;
 }
 
-/* --- MOLDE DA CARTA --- */
+/* === MOLDE DA CARTA === */
 .mtg-card {
     /* Dimensões baseadas na proporção real de 63x88mm para renderização em tela */
-    width: 300px; 
+    width: 300px;
     height: 418px;
+    /* Impede que a carta seja espremida ou deformada ao redimensionar a janela */
+    flex-shrink: 0;
     background-color: black;
     border-radius: 12px;
     padding: 10px;
@@ -94,14 +123,18 @@ body {
     padding: 8px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribui o espaçamento residual de forma igualitária */
+    /* Distribui o espaçamento residual de forma igualitária */
+    justify-content: space-between;
     font-size: 14px;
 }
 
 .card-header {
     display: flex;
-    justify-content: space-between; /* Fixa o Nome à esquerda e o Custo à direita */
-    font-weight: bold;
+    /* Fixa o nome à esquerda e o custo à direita */
+    justify-content: space-between;
+    font-family: 'Beleren Bold', sans-serif;
+    /* Removemos o bold padrão do navegador pois a fonte já é bold */
+    font-weight: normal;
     border-bottom: 1px solid #ccc;
     padding-bottom: 4px;
 }
@@ -110,47 +143,56 @@ body {
     height: 120px;
     background-color: #eee;
     display: flex;
-    align-items: center; /* Centralização vertical interna */
-    justify-content: center; /* Centralização horizontal interna */
+    /* Centralização vertical e horizontal interna */
+    align-items: center;
+    justify-content: center;
     margin: 8px 0;
     color: #999;
 }
 
 .card-type {
-    font-weight: bold;
+    font-family: 'Beleren Bold', sans-serif;
+    font-weight: normal;
     border-bottom: 1px solid #ccc;
     padding-bottom: 4px;
     margin-bottom: 8px;
 }
 
 .card-text-box {
-    flex-grow: 1; /* Força a caixa de texto a expandir tomando o centro da carta */
+    /* Força a caixa de texto a expandir tomando o centro da carta */
+    flex-grow: 1;
+    /* Fonte com serifa para o texto de regras */
+    font-family: 'Plantin Regular', serif;
+    font-size: 15px;
     border: 1px solid #ccc;
     padding: 6px;
     margin-bottom: 8px;
     background-color: #fdfdfd;
 }
 
-.card-footer{
+.card-footer {
     display: flex;
-    justify-content: flex-end; /* Alinha o conteúdo à margem direita */
+    /* Alinha o conteúdo à margem direita */
+    justify-content: flex-end;
     font-weight: bold;
 }
 
-/* --- TABELA DE DEPURAÇÃO --- */
-#debugTableContainer{
+/* === TABELA DE DEPURAÇÃO === */
+#debugTableContainer {
     margin-top: 40px;
     border-top: 2px dashed #ccc;
     padding-top: 20px;
 }
 
-#debugTable{
+#debugTable {
     width: 100%;
-    border-collapse: collapse; /* Funde bordas adjacentes para evitar duplicação visual */
+    /* Funde bordas adjacentes para evitar duplicação visual */
+    border-collapse: collapse;
     background-color: white;
 }
 
-#debugTable th, #debugTable td {
+#debugTable th,
+#debugTable td {
     border: 1px solid #999;
     padding: 8px;
     text-align: left;

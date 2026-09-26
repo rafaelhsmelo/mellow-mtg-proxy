@@ -1,4 +1,4 @@
-// --- 1. MAPEAMENTO DO DOM ---
+// === 1. MAPEAMENTO DO DOM ===
 
 // Controles de interação
 const searchInput = document.getElementById('searchInput');
@@ -8,13 +8,13 @@ const searchButton = document.getElementById('searchButton');
 const cardName = document.querySelector('.card-name');
 const cardMana = document.querySelector('.card-mana');
 const cardType = document.querySelector('.card-type');
-const cardText = document.querySelector('.card-text-box'); 
+const cardText = document.querySelector('.card-text-box');
 const cardPt = document.querySelector('.card-pt');
 
 // Alvo de injeção de dados para a tabela
 const debugTableBody = document.getElementById('debugTableBody');
 
-// --- 2. REGISTRO DE EVENTOS ---
+// === 2. REGISTRO DE EVENTOS ===
 
 // Aciona a execução da busca através do clique
 searchButton.addEventListener('click', searchCard);
@@ -26,7 +26,7 @@ searchInput.addEventListener('keyup', function (event) {
     }
 });
 
-// --- 3. LÓGICA DE REQUISIÇÃO E PROCESSAMENTO ---
+// === 3. LÓGICA DE REQUISIÇÃO E PROCESSAMENTO ===
 
 // Função assíncrona necessária para operações de rede (fetch)
 async function searchCard() {
@@ -51,17 +51,16 @@ async function searchCard() {
         // Conversão do corpo da resposta para um objeto JavaScript estruturado
         const cardData = await response.json();
 
-        // --- 4. POPULAÇÃO DOS DADOS DA CARTA ---
-        
+        // === 4. PREENCHIMENTO DOS DADOS DA CARTA ===
+
         cardName.textContent = cardData.name;
-        
-        // Correção de chave: a propriedade na API é "mana_cost". Fallback para evitar undefined em terrenos.
-        cardMana.textContent = cardData.mana_cost || ""; 
-        
+        cardMana.innerHTML = formatIcons(cardData.mana_cost || "");
         cardType.textContent = cardData.type_line;
-        
-        // Correção de variável: direcionado para cardText, não cardType.
-        cardText.textContent = cardData.oracle_text || "";
+
+        // Formata ícones e aplica quebra de linha visual para a tag <br> no texto da carta
+        let formattedCardText = formatIcons(cardData.oracle_text || "");
+        formattedCardText = formattedCardText.replace(/\n/g, '<br><br>');
+        cardText.innerHTML = formattedCardText;
 
         // Validação condicional: preenche apenas se ambos os valores existirem
         if (cardData.power && cardData.toughness) {
@@ -70,11 +69,8 @@ async function searchCard() {
             cardPt.textContent = "";
         }
 
-        // --- 5. POPULAÇÃO DA TABELA DE DEPURAÇÃO ---
-        
-        // O bloco for foi movido para o interior da função searchCard e da estrutura try.
-        // É necessário garantir que ele ocorra após a definição da variável cardData.
-        
+        // === 5. POPULAÇÃO DA TABELA DE DEPURAÇÃO ===
+
         // Reinicia o corpo da tabela para evitar acúmulo de buscas sucessivas
         debugTableBody.innerHTML = "";
 
@@ -87,10 +83,9 @@ async function searchCard() {
 
             cellKey.textContent = key;
 
-            // Tratamento de tipo: converte objetos ou arrays aninhados em texto legível.
-            // Correção de sintaxe implementada no operador ternário (adição do fallback : value).
+            // Tratamento de tipo: converte objetos ou arrays aninhados em texto legível
             cellValue.textContent = typeof value === 'object' ? JSON.stringify(value) : value;
-            
+
             // Montagem da hierarquia DOM
             row.appendChild(cellKey);
             row.appendChild(cellValue);
@@ -102,4 +97,33 @@ async function searchCard() {
         console.error('Erro na busca', error);
         alert("Carta não encontrada");
     }
+}
+
+// === 6. FUNÇÕES AUXILIARES ===
+
+// Dicionário de conversão de ícones Scryfall para mana-font
+const manaIconMap = {
+    't': 'tap',
+    'q': 'untap',
+    '1/2': '1-2',
+    '∞': 'infinity'
+};
+
+// Converte texto entre chaves (ex: {1}, {W}, {T}) em ícones HTML da biblioteca mana-font
+function formatIcons(text) {
+    // Retorna vazio se não tiver texto
+    if (!text) return "";
+
+    // Procura globalmente por chaves e captura o conteúdo interno
+    return text.replace(/\{([^}]+)\}/g, function (match, p1) {
+        let icon = p1.toLowerCase();
+
+        // Busca o ícone no dicionário. Se não existir, mantém o próprio ícone.
+        icon = manaIconMap[icon] || icon;
+        
+        // Remove a barra de custos híbridos ou phyrexianos (ex: "w/u" vira "wu")
+        icon = icon.replace('/', '');
+        
+        return `<i class="ms ms-${icon} ms-cost"></i>`;
+    });
 }

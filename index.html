@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <!-- Garante a responsividade e o dimensionamento correto em diferentes telas -->
@@ -7,11 +8,16 @@
     <title>Mellow MTG Proxy</title>
     <!-- Vincula as regras de estilização externas -->
     <link rel="stylesheet" href="styles.css">
+    <!-- Importação da biblioteca mana-font para renderizar os símbolos -->
+    <link href="//cdn.jsdelivr.net/npm/mana-font@latest/css/mana.css" rel="stylesheet" type="text/css" />
 </head>
+
 <body>
-    <!-- Contêiner principal estrutural (Flexbox) para dividir menu e área de trabalho -->
+    <!-- === ESTRUTURA PRINCIPAL === -->
+    <!-- Contêiner principal estrutural usando Flexbox para dividir menu e área de trabalho -->
     <div class="layout-container">
-        
+
+        <!-- === MENU LATERAL === -->
         <!-- Barra lateral de navegação e controles -->
         <aside class="sidebar">
             <div class="sidebar-header">
@@ -25,32 +31,33 @@
             </div>
         </aside>
 
+        <!-- === ÁREA PRINCIPAL === -->
         <!-- Área de exibição dinâmica -->
         <main class="main-content">
-            
+
             <!-- Contêiner destinado à renderização das cartas -->
             <div id="cardsContainer">
-                
-                <!-- Estrutura base do molde da carta -->
+
+                <!-- Molde da carta -->
                 <div class="mtg-card">
                     <!-- Fundo branco da carta -->
                     <div class="card-inner">
-                        <!-- Cabeçalho contendo Nome e Custo de Mana -->
+                        <!-- Cabeçalho contendo nome e custo de mana -->
                         <div class="card-header">
                             <span class="card-name">Nome</span>
                             <span class="card-mana">Custo</span>
                         </div>
-                        
-                        <!-- Espaço reservado para a futura inserção gráfica -->
+
+                        <!-- Espaço reservado para a futura inserção gráfica da arte -->
                         <div class="card-art-placeholder">[Arte]</div>
-                        
+
                         <!-- Linha descritiva de tipos e subtipos -->
                         <div class="card-type">Tipo</div>
-                        
-                        <!-- Caixa de regras oráculo -->
+
+                        <!-- Caixa do texto de regras da carta -->
                         <div class="card-text-box">Texto</div>
-                        
-                        <!-- Rodapé para status de combate (Poder/Resistência) -->
+
+                        <!-- Rodapé para status de combate (poder/resistência) -->
                         <div class="card-footer">
                             <span class="card-pt">Poder/Resistência</span>
                         </div>
@@ -58,6 +65,7 @@
                 </div>
             </div>
 
+            <!-- === TABELA DE DEPURAÇÃO === -->
             <!-- Ferramenta de depuração para inspeção visual do JSON da API -->
             <div id="debugTableContainer">
                 <h3>Dados do Scryfall</h3>
@@ -75,8 +83,9 @@
             </div>
         </main>
     </div>
-    
+
     <!-- Script posicionado no final para garantir o pré-carregamento do DOM -->
     <script src="script.js"></script>
 </body>
+
 </html>
