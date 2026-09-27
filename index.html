@@ -26,7 +26,7 @@
 
             <!-- Contêiner do sistema de busca -->
             <div class="search-container">
-                <input type="text" id="searchInput" placeholder="Ex: Sol Ring">
+                <textarea id="searchInput" placeholder="Ex: &#10;1 Counterspell&#10;2 Island" rows="10"></textarea>
                 <button id="searchButton">Pesquisar</button>
             </div>
         </aside>
@@ -38,31 +38,7 @@
             <!-- Contêiner destinado à renderização das cartas -->
             <div id="cardsContainer">
 
-                <!-- Molde da carta -->
-                <div class="mtg-card">
-                    <!-- Fundo branco da carta -->
-                    <div class="card-inner">
-                        <!-- Cabeçalho contendo nome e custo de mana -->
-                        <div class="card-header">
-                            <span class="card-name">Nome</span>
-                            <span class="card-mana">Custo</span>
-                        </div>
-
-                        <!-- Espaço reservado para a futura inserção gráfica da arte -->
-                        <div class="card-art-placeholder">[Arte]</div>
-
-                        <!-- Linha descritiva de tipos e subtipos -->
-                        <div class="card-type">Tipo</div>
-
-                        <!-- Caixa do texto de regras da carta -->
-                        <div class="card-text-box">Texto</div>
-
-                        <!-- Rodapé para status de combate (poder/resistência) -->
-                        <div class="card-footer">
-                            <span class="card-pt">Poder/Resistência</span>
-                        </div>
-                    </div>
-                </div>
+                <!-- As cartas serão criadas e inseridas aqui pelo Javascript -->
             </div>
 
             <!-- === TABELA DE DEPURAÇÃO === -->
