@@ -170,6 +170,11 @@ body {
     background-color: #fdfdfd;
 }
 
+.mtg-card .ms{
+    font-size: .75em;
+    vertical-align: 0em;
+    margin: 0 1px;
+}
 .card-footer {
     display: flex;
     /* Alinha o conteúdo à margem direita */
